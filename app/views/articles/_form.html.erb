@@ -12,16 +12,25 @@
     </ul>
   </div>
   <% end %>
-  <p>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.text_area :text, :size => "50x6"%>
-  </p>
- <p>
-    <input type="file" name="article_pic" accept="image/*">            
- </p>
+  <div class="panel">
+    <div class="panel-body">
+      <p>
+        <%= f.text_field :title %>
+      </p>
+    </div>
+ </div>
+  <div class="panel">
+    <div class="panel-body">
+      <p>
+        <%= f.text_area :text, :size => "50x6"%>
+      </p>
+    </div>
+  </div>
+ <div class="panel">
+    <p>
+       <div class="panel-heading"><strong><h6>Add Featured Photo: </h6></strong></div><div class="panel-body"><input type="file" name="article_pic" accept="image/*"></div>           
+    </p>
+ </div>
   <p>
     <%= f.submit "Create", class: "btn btn-primary btn-block"%>
   </p>

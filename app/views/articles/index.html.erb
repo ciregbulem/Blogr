@@ -17,10 +17,10 @@
 												<p>
 												<div c><h1><a href="<%= article_path(article) %>"><%= article.title %></a></h1></div>
 												<p><%= article.text %></p>
-												<div class="btn-group btn-group-justified">
-													<a type="button" href="<%= article_path(article) %>" class="btn btn-default">Read</a> 
+												<div class="btn-group ">
+													<a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
 													<a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
-													<%= link_to 'Delete', article_path(article), :class => "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %>
+													<%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
 												</div>
 												</p>
 											</td>
