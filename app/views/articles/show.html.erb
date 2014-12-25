@@ -7,7 +7,6 @@
     <title><%= @article.title %></title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,27 +43,31 @@
         </div><!--/.nav-collapse
       </div>
    </nav>-->
-  <div class="row">
-    <div>
-      <ol class="breadcrumb">
-	<li><a href="#">Home</a></li>
-	<li><a href="#">Library</a></li>
-	<li class="active">Data</li>
-      </ol>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div>
+	<ol class="breadcrumb">
+	  <li><a href="<%= articles_path %>">Home</a></li>
+	  <li><a href="<%= articles_path %>">Articles</a></li>
+	  <li class="active"><%= @article.title %></li>
+	</ol>
+      </div>
     </div>
-  </div>
-    <div class="container">
-      <div class="row">
-	<div class="page-header">
-	  <h1><%= @article.title %> <a type="button" class="btn btn-primary btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></h1>
-	</div>
+      
+    <div class="row">
+
+      <div class="page-header">
+	<h1><%= @article.title %> <a type="button" class="btn btn-primary btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></h1>
       </div>
 
-	  <p class="lead">
-	    <%= @article.text %>
-	  </p>
-
-    </div><!-- /.container -->
+	<p class="lead">
+	  <%= @article.text %>
+	</p>
+    </div>
+  </div><!-- /.container -->
 	
 
 <a href="<%= articles_path %>" type="button" class="btn btn-primary">View All</a>
@@ -72,6 +75,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
