@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+      <div>
+	<ol class="breadcrumb">
+	  <li><a href="<%= root_path %>">Home</a></li>
+	  <li><a href="<%= users_path %>">Users</a></li>
+	  <li class="active"><%= @user.fname %></li>
+	</ol>
+      </div>
+    </div>
+      
+    <div class="row">
+
+      <div class="page-header">
+	<h1><%= @user.fname %> <%= @user.lname %> <a type="button" class="btn btn-primary btn-sm" href="<%= edit_user_path %>">Edit</a> <%= link_to 'Delete', user_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></h1>
+      </div>
+
+	<p class="lead">
+	  <%= @user.email %>
+	</p>
+    </div>
+  </div><!-- /.container -->
