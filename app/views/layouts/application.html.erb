@@ -39,7 +39,7 @@
                     <% end %>
                    <% if user_signed_in? %>
                     <%= link_to " Profile", current_user, :class => "btn btn-default btn-md fa fa-user" %>
-                    <%= link_to " Sign Out", destroy_user_session_path, :class => "btn btn-danger btn-md fa fa-power-off", method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to " Sign Out", destroy_user_session_path, :class => "btn btn-danger btn-md fa fa-lock", method: :delete, data: { confirm: 'Are you sure?' } %>
                     <% end %>
                 </div>
               </form>
