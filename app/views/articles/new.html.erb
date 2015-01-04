@@ -27,29 +27,25 @@
               </form>
             </div><!--/.nav-collapse
           </div>
-        </nav> --->
-      <br>
-      <br>
-      <br>
+        </nav> -->
       <div class="container">
         <div class="row">  
 
             
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-              <div class="panel">
-                <div class="panel-heading"><h1>New Article</h1></div>
+              <div class="panel panel-default">
+                <div class="panel-heading"><h3><i class="fa fa-edit"></i> New Article</h3></div>
                 <div class="panel-body">
                 <%= render 'form' %>
                 </div>
               </div>
             </div>
-              <br>
-              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 pull-right">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a class="btn btn-primary" role="button" href="<%= articles_path %>">View All</a></li>
-                  <li><a class="btn btn-warning" role="button" href="<%= articles_path %>">Cancel</a></li>
-                </ul>
-              </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <ul class="nav nav-stacked">
+                <li><a class="btn btn-primary" role="button" href="<%= articles_path %>">View All</a></li>
+                <li><a class="btn btn-warning" role="button" href="<%= articles_path %>">Cancel</a></li>
+              </ul>
+            </div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             
             </div>

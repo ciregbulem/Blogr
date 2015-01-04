@@ -1,39 +1,104 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<html>
+  <head>
+    <title>Edit Profile</title>
+  </head>
+  <body data-spy="scroll" data-target=".navbar-example" style="position: relative;">
+    <br>
+    <div class="container-fluid">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4><i class="fa fa-edit"> Edit Profile</i></h4></div>
+              <div class="panel-body">
+                <div class="col-md-3 col-lg-3">
+                  <div class="panel panel-default">
+                    <div class="panel-body navbar-example">
+                      <ul class="nav nav-pills nav-stacked" role="pilllist">
+                        <li><a href="#info" class="nav-link page-scroll">Basic Info</a></li>
+                        <li><a href="#email-password" class="nav-link page-scroll">Email & Password</a></li>
+                        <li><a href="#deactivate" class="nav-link page-scroll">Deactivate</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                  
+                  <!--Basic Info panel-->
+                  <div class="row">
+                    <div class="panel panel-default" id="info">
+                      <div class="panel-heading"><h3 class="panel-title">Basic Info</h3></div>
+                        <div class="panel-body">
+                          <%= bootstrap_form_for @user do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                              <%= f.text_field :fname, autofocus: true, label: "First Name" %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+                            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                            <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                              <%= f.text_field :lname, autocomplete: "off", label: "Last Name" %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+                              <%= f.text_area :about, label: "About" %>
+                            
+                            <div class="actions">
+                              <%= f.submit "Save", class: "btn btn-success" %>
+                            </div>
+                          <% end %>
+                        </div>
+                    </div>
+                  </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+                  <!-- Email & Password panel-->
+                  <div class="row">
+                    <div class="panel panel-default" id="email-password">
+                      <div class="panel-heading"><h3 class="panel-title">Email & Password</h3></div>
+                        <div class="panel-body">
+                          <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                            <%= devise_error_messages! %>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+                              <%= f.email_field :email, autofocus: true %>
 
-<h3>Cancel my account</h3>
+                            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                            <% end %>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+                            <div class="field">
+                              <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                              <%= f.password_field :password, autocomplete: "off", hide_label: true %>
+                            </div>
 
-<%= link_to "Back", :back %>
+                              <%= f.password_field :password_confirmation, autocomplete: "off", label: "Password Confirmation" %>
+
+                            <div class="field">
+                              <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                              <%= f.password_field :current_password, autocomplete: "off", hide_label: true %>
+                            </div>
+
+                            <div class="actions">
+                              <%= f.submit "Save", class: "btn btn-success" %>
+                            </div>
+                          <% end %>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="panel panel-default" id="deactivate">
+                    <div class="panel-heading"><h3 class="panel-title">Deactivate Account</h3></div>
+                      <div class="panel-body">
+                        <p>
+                        <%= link_to "Deactivate Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn btn-danger" %></p>
+
+                        <%= link_to "Back", :back, :class => "btn btn-primary" %>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+
+    </div>
+  </body>
+</html>

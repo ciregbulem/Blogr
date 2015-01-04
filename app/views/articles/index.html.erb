@@ -1,65 +1,66 @@
 <html>
 	<body>
-		<br>
-		<br>
-		<br>
-		<br>
 		<div class="row">
-			<div class="col-sm-12 col-md-8 col-lg-8">
-				<div class="panel panel-default">
-					<table class="table table-hover table-responsive"> 
-						<% @articles.each do |article| %>
-							<div>
-								<div >
-									<tr>
-										
-											<td>
-												<p>
-												<div c><h1><a href="<%= article_path(article) %>"><%= article.title %></a></h1></div>
-												<p><%= article.text %></p>
-												<div class="btn-group ">
-													<a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
-													<a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
-													<%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-												</div>
-												</p>
-											</td>
-									</tr>
+			<% if user_signed_in? %>
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+			<% else %>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<% end %>
+					<div class="panel panel-default">
+						<table class="table table-responsive"> 
+							<% @articles.each do |article| %>
+								<div>
+									<div >
+										<tr>
+											
+												<td>
+													<p>
+													<div c><h1><a href="<%= article_path(article) %>"><%= article.title %></a></h1></div>
+													<p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
+													<div class="btn-group ">
+														<a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
+														<a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
+														<%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+													</div>
+													</p>
+												</td>
+										</tr>
+									</div>
 								</div>
-							</div>
-						<% end %>
-					</table>
-				</div>
+							<% end %>
+						</table>
+					</div>
 			<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
 			</div>
-			
-			<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
+			<% if user_signed_in? %>
+				<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
 
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						About
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							About
+						</div>
+						<div class="panel-body">
+							<p>
+								<%= current_user.about %>
+							</p>
+						</div>
 					</div>
-					<div class="panel-body">
-						<p>
-							Born in London, England and raised in Los Angeles, California. Started working with graphic design in 2009 and began coding in 2011. I have participated in various software engineering and design projects for companies and I often create for my own pleasure in my free time.
-						</p>
+					
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							Contact
+						</div>
+						<div class="panel-body">
+							<p>
+								<h4><i class="fa fa-facebook-square"></i> <%= current_user.fname %> <%= current_user.lname %></h4>
+								<h4><i class="fa fa-twitter-square"> @DizzOnEm</i></h4>
+								<h4><i class="fa fa-github-square"> ciregbulem</i></h4>
+								<h4><i class="fa fa-envelope-square"></i> <%= current_user.email %></h4>
+							</p>
+						</div>
 					</div>
 				</div>
-				
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						Contact
-					</div>
-					<div class="panel-body">
-						<p>
-							<h6><i class="fa fa-facebook-square"> Chudi Iregbulem</i></h6>
-							<h6><i class="fa fa-twitter-square"> @DizzOnEm</i></h6>
-							<h6><i class="fa fa-github-square"> ciregbulem</i></h6>
-							<h6><i class="fa fa-envelope-square"> chudi.iregbulem@trincoll.edu</i></h6>
-						</p>
-					</div>
-				</div>
-			</div>
+			<% end %>
 		</div>		
 	</body>
 </html>

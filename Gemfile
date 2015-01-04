@@ -9,6 +9,9 @@ gem 'will_paginate-bootstrap'
 gem 'rails_12factor'
 gem 'devise'
 gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-facebook'
+gem 'aws-sdk'
+gem 'figaro'
 ruby '2.0.0'
 
 # Use PostgreSQL as the database for Active Record

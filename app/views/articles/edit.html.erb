@@ -1,31 +1,26 @@
 <html>
   <body>
-    <br>
-    <br>
-    <br>
       <div class="container-fluid">
         <div class="row">
 	  
-            <!-- Edit Form -->
+        <!-- Edit Form -->
 	    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
-              <h1>Edit</h1>
-            
-	      <%= render 'update_form' %>
-            </div>
+          <div class="panel panel-default">
+	          <div class="panel-heading"><h4><i class="fa fa-edit"> Edit</h4></i></div>
+	          <div class="panel-body"> 
+		      	<%= render 'update_form' %>
+		      </div>
+	      </div>
+    	</div>
 	    
 	    <!-- Sidebar -->
 	    <div class="container-fluid">
 	      <div class="row">
 	      <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-		
-		  <br>
-		  
 		    <ul class="nav nav-pills nav-stacked">
-		      <li><a class="btn btn-primary" role="button" href="<%= articles_path %>">Views All</a></li>
-		      <li><a class="btn btn-warning" role="button" href="<%= article_path %>" onclick="alert("Are you sure?");">Cancel</a></li>
+		      <li><a class="btn btn-primary btn-block" role="button" href="<%= articles_path %>">View All</a></li>
+		      <li><a class="btn btn-warning btn-block" role="button" href="<%= article_path %>" onclick="alert("Are you sure?");">Cancel</a></li>
 		    </ul>
-		  
-
 	      </div>
 	    </div>
 	    </div>
