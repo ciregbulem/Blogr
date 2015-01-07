@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-        sessions: 'users/sessions'
+        sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'
       }
   resources :users
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'home/about'
   get 'home/contact'
   get 'articles/index'

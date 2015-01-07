@@ -13,10 +13,10 @@
                 <div class="col-md-3 col-lg-3">
                   <div class="panel panel-default">
                     <div class="panel-body navbar-example">
-                      <ul class="nav nav-pills nav-stacked" role="pilllist">
-                        <li><a href="#info" class="nav-link page-scroll">Basic Info</a></li>
-                        <li><a href="#email-password" class="nav-link page-scroll">Email & Password</a></li>
-                        <li><a href="#deactivate" class="nav-link page-scroll">Deactivate</a></li>
+                      <ul class="nav nav-pills nav-stacked page-scroll" role="pilllist">
+                        <li><a href="#info" class="nav-link page-scroll smooth-scroll">Basic Info</a></li>
+                        <li><a href="#email-password" class="nav-link page-scroll smooth-scroll">Email & Password</a></li>
+                        <li><a href="#deactivate" class="nav-link page-scroll smooth-scroll">Deactivate</a></li>
                       </ul>
                     </div>
                   </div>
@@ -87,8 +87,6 @@
                       <div class="panel-body">
                         <p>
                         <%= link_to "Deactivate Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn btn-danger" %></p>
-
-                        <%= link_to "Back", :back, :class => "btn btn-primary" %>
                       </div>
                   </div>
                 </div>

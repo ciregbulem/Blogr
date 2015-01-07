@@ -10,7 +10,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <nav class="navbar navbar-inverse" role="navigation">
+            <nav class="navbar navbar-default" role="navigation">
               <div class="container">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -34,13 +34,19 @@
               <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">
                     <% if user_signed_in? != true %>
-                        <%= link_to " Login", new_user_session_path, :class => "btn btn-default btn-md fa fa-sign-in" %>
-                        <%= link_to " Sign Up", new_user_registration_path, :class => "btn btn-success btn-md fa fa-check" %>
+                        <%= link_to new_user_session_path, :class => "btn btn-primary btn-md" do %>
+                          <i class="fa fa-sign-in"></i> Login
+                        <% end %>
+                        <%= link_to new_user_registration_path, :class => "btn btn-success btn-md" do %>
+                          <i class="fa fa-check"></i> Sign Up
+                        <% end %>
                     <% end %>
-                   <% if user_signed_in? %>
-                    <%= link_to " Profile", current_user, :class => "btn btn-default btn-md fa fa-user" %>
-                    <%= link_to " Sign Out", destroy_user_session_path, :class => "btn btn-danger btn-md fa fa-lock", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% if user_signed_in? %>
+                    <%= link_to current_user, :class => "btn btn-primary btn-md" do %>
+                      <img class="img img-rounded" width="30" height="30" src=<%= current_user.image %>>  </i>  <%= current_user.fname%>
                     <% end %>
+                    <%= link_to "Sign Out", destroy_user_session_path, :class => "btn btn-danger btn-lg", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% end %>
                 </div>
               </form>
                 </div><!--/.nav-collapse -->
@@ -51,31 +57,74 @@
     
     <div class="container">
         <div class="row">
-            <% if flash.alert %>
-                <h6 class="alert alert-danger alert-dismissible" role="alert">
-                    <%= flash.alert %>
-                </h6>
-            <% end %>
-            <% if flash.notice %>
-                    <h6 class="alert alert-success alert-dismissible" role="alert">
-                        <%= flash.notice %>
-                    </h6>
-            <% end %>
+            <div id="flash">
+              <% if flash.alert %>
+                  <h6 class="alert alert-danger alert-dismissible" role="alert">
+                      <%= flash.alert %>
+                  </h6>
+              <% end %>
+            </div>
+            <div id="notice">
+              <% if flash.notice %>
+                      <h6 class="alert alert-success alert-dismissible" role="alert">
+                          <%= flash.notice %>
+                      </h6>
+              <% end %>
+            </div>
         </div>
     </div>
     <% end %>
 </div>
     <div class="container">
-      <div class="row">
 	<div class="col-xs-12 col-sm-12 col md-12 col-lg-12">
 
 	  <%= yield %>
 	</div>
-      </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#flash').remove();
+        }, 5000);
+       })
+
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#notice').remove();
+        }, 5000);
+       })
+    </script>
+    <script type="text/javascript">
+      (function (jQuery) {
+    jQuery.mark = {
+      jump: function (options) {
+        var defaults = {
+          selector: 'a.smooth-scroll'
+        };
+        if (typeof options == 'string') defaults.selector = options;
+        var options = jQuery.extend(defaults, options);
+        return jQuery(options.selector).click(function (e) {
+          var jumpobj = jQuery(this);
+          var target = jumpobj.attr('href');
+          var thespeed = 1000;
+          var offset = jQuery(target).offset().top;
+          jQuery('html,body').animate({
+            scrollTop: offset
+          }, thespeed, 'swing')
+          e.preventDefault();
+        })
+      }
+    }
+  })(jQuery);
+
+
+  jQuery(function(){  
+    jQuery.mark.jump();
+  });
+    </script>
 </body>
 </html>

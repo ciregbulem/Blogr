@@ -1,25 +1,70 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
-  before_filter :authenticate_user!
+  def index
+  	@users = User.paginate(:page => params[:page], :per_page => 3)
+  end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+	@articles = Article.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 4).order('created_at DESC')
   end
 
   def edit
   	@user = current_user
   end
 
+  def destroy
+	@user = User.find(params[:id])
+	@user.destroy
+		   
+	redirect_to users_path
+  end
+
   def update
-  	@user = current_user
-  	if @user.update(basic_user_params)
-  		redirect_to @user
-  	else
-  		render 'edit'
-  	end
+
+  	# authorize! :update, @user
+    respond_to do |format|
+      if @user.update(user_params)
+        sign_in(@user == current_user ? @user : current_user, :bypass => true)
+        format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  # GET/PATCH /users/:id/finish_signup
+  def finish_signup
+    # authorize! :update, @user 
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if current_user.update(user_params)
+        @user.skip_reconfirmation! if @user.respond_to?(:skip_confirmation)
+        sign_in(@user, :bypass => true)
+        redirect_to @user, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
   end
 
   private
+
+  	private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      accessible = [ :fname, :email ] # extend with your own params
+      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+      params.require(:user).permit(accessible)
+    end
+
   	def basic_user_params
   		params.require(:user).permit(:email, :fname, :lname, :about)
   	end

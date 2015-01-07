@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 	
 	def create
 		@article = Article.new(article_params)
-		
+		@article.user_id = current_user.id
 		if @article.save
 			@article.save
 			redirect_to @article
@@ -20,12 +20,17 @@ class ArticlesController < ApplicationController
 	end
 	
 	def index
-
   		@articles = Article.paginate(:page => params[:page], :per_page => 4)
+  		@articles = @articles.reverse_order
 	end
 	
 	def edit
-		@article = Article.find(params[:id])
+		if current_user.id == Article.find(params[:id]).user_id
+			@article = Article.find(params[:id])
+		else
+			flash[:alert] = 'Cannot edit articles you did not create. Only Admins have that access'
+			redirect_to root_path
+		end
 	end
 	
 	def update
