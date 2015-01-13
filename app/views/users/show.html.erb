@@ -4,83 +4,93 @@
   <title><%= @user.fname %> <%= @user.lname %></title>
 </head>
   <body>
-    <div class="row">
     	<ol class="breadcrumb">
     	  <li><a href="<%= root_path %>">Home</a></li>
     	  <li><a href="<%= users_path %>">Users</a></li>
     	  <li class="active"><%= @user.fname %></li>
     	</ol>
-    </div>
-        
-    <div class="row">
-        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4">
-      	    <img class="img img-responsive img-thumbnail" src=<%= @user.image %> alt="No-Image">
-        </div>
+    <div class="well well-lg">     
+      <div class="row">  
         <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-          <h1><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1>
-        </div>
-          <div class="col-xs-12 col-sm-1 col-md-2 col-lg-2">
-            <a type="button" class="btn btn-primary btn-sm" href="<%= edit_user_registration_path %>">Edit</a>
+          
+            <div class="media">
+              <a class="media-left" href="#">
+                <% if @user.image == nil %>
+                  <%= image_tag @user.avatar.url(:medium), class: "img img-responsive img-rounded img-thumbnail" %>
+                <% else %>
+                  <%= image_tag @user.image, size: "300", class: "img-responsive img-rounded img-thumbnail" %>
+                <% end %>
+              </a>
+              <div class="media-body">
+                <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
+                <a href="<%= @user.info{"link"} %>"><i class="fa fa-facebook-square"></i></a>
+                <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-md" %>
+              </div>
+            </div>
           </div>
+        </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">About</div>
+            <div class="panel-body">
+              <p>
+                <%= @user.info %>
+              </p>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">Contact</div>
+          <div class="panel-body">
+            <p>
+              Email: <%= @user.email %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1 col-md-7 col-lg-7">
+      <div class="row">
         <div class="panel panel-default">
           <div class="panel-heading">User Articles</div>
           <div class="panel-body">
             <table class="table table-responsive"> 
               <% @articles.each do |article| %>
                 <div>
-                  <div >
-                    <tr>
-                      
-                        <td>
-                          <div class="row">
-                          <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2"><img src="https://cdn2.iconfinder.com/data/icons/picons-essentials/71/gallery-512.png" class="img-responsive img-thumbnail"></div>
-                          <div class="col-xs-8 col-sm-8 col-md-10 col-lg-10"><h1><a href="<%= article_path(article) %>"><%= article.title %></a></h1>
-                          <p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
-                          <div class="btn-group">
-                            <a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
-                            <% if user_signed_in? %>
-                              <a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
-                              <%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <tr>
+                      <td>
+                        <div class="media">
+                          <div class="media-left">
+                            <% if article.feature.url == nil %>
+                              <%= image_tag article.feature.default_url(:thumb), class: "img-responsive img-thumbnail" %>
+                            <% else %>
+                              <%= image_tag article.feature.url(:thumb), class: "img-responsive img-thumbnail" %>
                             <% end %>
                           </div>
+                          <div class="media-body">
+                            <h1 class="media-heading"><a href="<%= article_path(article) %>"><%= article.title %></a></h1>
+                            <p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
+                              <div class="btn-group">
+                                <a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
+                                <% if user_signed_in? %>
+                                  <a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
+                                  <%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                                <% end %>
+                              </div>
                           </div>
-                          </div>
-                        </td>
-                    </tr>
-                  </div>
+                        </div>
+                    </td>
+                  </tr>
                 </div>
               <% end %>
             </table>
-            <%= will_paginate @articles %>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="container-fluid">
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-        	<div class="panel panel-default">
-            <div class="panel-heading">About</div>
-            <div class="panel-body">
-              <p class="lead">
-                <%= @user.about %>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">Contact</div>
-            <div class="panel-body">
-              <p class="lead">
-            	  Email: <%= @user.email %>
-            	</p>
-            </div>
+            <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
           </div>
         </div>
       </div>

@@ -19,9 +19,9 @@
   <p>
     <%= f.text_area :text, :size => "50x6"%>
   </p>
- <p>
-    <input type="file" name="article_pic" accept="image/*">            
- </p>
+  <p>
+    <%= f.file_field :feature, label: "Change Featured Photo:" %>       
+  </p>
   <p>
     <%= f.submit "Update", class: "btn btn-primary btn-block"%>
   </p>

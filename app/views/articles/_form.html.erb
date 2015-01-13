@@ -26,11 +26,11 @@
       </p>
     </div>
   </div>
- <div class="panel">
+
     <p>
-       <div class="panel-heading"><strong><h6>Add Featured Photo: </h6></strong></div><div class="panel-body"><input type="file" name="article_pic" accept="image/*"></div>           
+      <%= f.file_field :feature, label: "Add Featured Image:" %>       
     </p>
- </div>
+
   <p>
     <%= f.submit "Create", class: "btn btn-primary btn-block"%>
   </p>

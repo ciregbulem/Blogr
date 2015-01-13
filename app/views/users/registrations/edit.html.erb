@@ -3,15 +3,12 @@
     <title>Edit Profile</title>
   </head>
   <body data-spy="scroll" data-target=".navbar-example" style="position: relative;">
-    <br>
-    <div class="container-fluid">
-
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block">
           <div class="panel panel-default">
             <div class="panel-heading"><h4><i class="fa fa-edit"> Edit Profile</i></h4></div>
               <div class="panel-body">
-                <div class="col-md-3 col-lg-3">
+                <div class="hidden-xs hidden-sm col-md-3 col-lg-3">
                   <div class="panel panel-default">
+                    <div class="panel-heading">Sections</div>
                     <div class="panel-body navbar-example">
                       <ul class="nav nav-pills nav-stacked page-scroll" role="pilllist">
                         <li><a href="#info" class="nav-link page-scroll smooth-scroll">Basic Info</a></li>
@@ -21,7 +18,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                   
                   <!--Basic Info panel-->
                   <div class="row">
@@ -39,6 +36,8 @@
                               <%= f.text_field :lname, autocomplete: "off", label: "Last Name" %>
 
                               <%= f.text_area :about, label: "About" %>
+
+                              <%= f.file_field :avatar, label: "Upload an Avatar" %>
                             
                             <div class="actions">
                               <%= f.submit "Save", class: "btn btn-success" %>
@@ -93,10 +92,6 @@
               </div>
             </div>
           </div>
-          
-        </div>
-        
 
-    </div>
   </body>
 </html>

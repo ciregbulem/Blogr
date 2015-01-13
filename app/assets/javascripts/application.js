@@ -14,3 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function makeActive (id)
+{
+	var button = document.getElementById(id);
+	$(button).addClass("active");
+}

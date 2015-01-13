@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @user.fname %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/lumen/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="<%= root_path %>">Rails Blog</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav">
+                    <li><%= link_to 'Home', root_path%></li>
+                    <% if user_signed_in? %>
+                      <li><%= link_to 'New', new_article_path%></li>
+                    <% end %>
+                  </ul>
+              <form class="navbar-form navbar-right" role="form">
+                <div class="form-group">
+                    <% if user_signed_in? != true %>
+                        <%= link_to new_user_session_path, :class => "btn btn-primary btn-md" do %>
+                          <i class="fa fa-sign-in"></i> Login
+                        <% end %>
+                        <%= link_to new_user_registration_path, :class => "btn btn-success btn-md" do %>
+                          <i class="fa fa-check"></i> Sign Up
+                        <% end %>
+                    <% end %>
+                  <% if user_signed_in? %>
+					<%= link_to current_user, :class => "btn" do %>
+                      <div class="media">
+                        <% if current_user.image == nil %>
+		                  <%= image_tag current_user.avatar.url(:thumb), class: "img img-responsive img-rounded img-thumbnail" %>
+		                <% else %>
+		                  <%= image_tag current_user.image, size: "32", class: "img-responsive img-rounded img-thumbnail" %>
+		                <% end %>
+                      </div>
+                    <% end %>
+                    <%= link_to "Sign Out", destroy_user_session_path, :class => "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% end %>
+                </div>
+              </form>
+                </div><!--/.nav-collapse -->
+              </div>
+            </nav>
+        </div>
+    <% if flash.alert || flash.notice %>
+    
+    <div class="container">
+        <div class="row">
+            <div id="flash">
+              <% if flash.alert %>
+                  <h6 class="alert alert-danger alert-dismissible" role="alert">
+                      <%= flash.alert %>
+                  </h6>
+              <% end %>
+            </div>
+            <div id="notice">
+              <% if flash.notice %>
+                      <h6 class="alert alert-success alert-dismissible" role="alert">
+                          <%= flash.notice %>
+                      </h6>
+              <% end %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+    <div class="container">
+	<div class="col-xs-12 col-sm-12 col md-12 col-lg-12">
+		<ol class="breadcrumb">
+    	  <li><a href="<%= root_path %>">Home</a></li>
+    	  <li><a href="<%= users_path %>">Users</a></li>
+    	  <li class="active"><%= @user.fname %></li>
+    	</ol>
+    <div class="well well-lg">     
+      <div class="row">  
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+          
+            <div class="media">
+              <a class="media-left" href="#">
+                <% if @user.image == nil %>
+                  <%= image_tag @user.avatar.url(:medium), class: "img img-responsive img-rounded img-thumbnail" %>
+                <% else %>
+                  <%= image_tag @user.image, size: "300", class: "img-responsive img-rounded img-thumbnail" %>
+                <% end %>
+              </a>
+              <div class="media-body">
+                <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
+                <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-md" %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    	<%= yield %>
+	</div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#flash').remove();
+        }, 5000);
+       })
+
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#notice').remove();
+        }, 5000);
+       })
+    </script>
+    <script type="text/javascript">
+      (function (jQuery) {
+    jQuery.mark = {
+      jump: function (options) {
+        var defaults = {
+          selector: 'a.smooth-scroll'
+        };
+        if (typeof options == 'string') defaults.selector = options;
+        var options = jQuery.extend(defaults, options);
+        return jQuery(options.selector).click(function (e) {
+          var jumpobj = jQuery(this);
+          var target = jumpobj.attr('href');
+          var thespeed = 1000;
+          var offset = jQuery(target).offset().top;
+          jQuery('html,body').animate({
+            scrollTop: offset
+          }, thespeed, 'swing')
+          e.preventDefault();
+        })
+      }
+    }
+  })(jQuery);
+
+
+  jQuery(function(){  
+    jQuery.mark.jump();
+  });
+    </script>
+</body>
+</html>

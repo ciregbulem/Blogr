@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-	@articles = Article.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 4).order('created_at DESC')
+	@articles = Article.where(:user_id => @user.id).paginate(:page => params[:page], :per_page => 3).order('created_at DESC')
   end
 
   def edit
@@ -40,12 +40,13 @@ class UsersController < ApplicationController
 
   # GET/PATCH /users/:id/finish_signup
   def finish_signup
+    current_user.email = current_user.temp_email
     # authorize! :update, @user 
     if request.patch? && params[:user] #&& params[:user][:email]
       if current_user.update(user_params)
         @user.skip_reconfirmation! if @user.respond_to?(:skip_confirmation)
-        sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        sign_in(current_user, :bypass => true)
+        redirect_to current_user, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
       end
@@ -60,12 +61,10 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      accessible = [ :fname, :email ] # extend with your own params
+      accessible = [ :fname, :lname, :email, :about, :avatar ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
 
-  	def basic_user_params
-  		params.require(:user).permit(:email, :fname, :lname, :about)
-  	end
+
 end

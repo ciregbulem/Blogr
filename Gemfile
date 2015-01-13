@@ -10,6 +10,7 @@ gem 'rails_12factor'
 gem 'devise'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook'
+gem "paperclip", "~> 4.2"
 gem 'aws-sdk'
 gem 'figaro'
 ruby '2.0.0'

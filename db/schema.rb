@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107084523) do
+ActiveRecord::Schema.define(version: 20150112051214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -22,6 +23,10 @@ ActiveRecord::Schema.define(version: 20150107084523) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "feature_file_name"
+    t.string   "feature_content_type"
+    t.integer  "feature_file_size"
+    t.datetime "feature_updated_at"
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
@@ -59,6 +64,13 @@ ActiveRecord::Schema.define(version: 20150107084523) do
     t.string   "provider"
     t.string   "uid"
     t.string   "image"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "temp_email"
+    t.boolean  "verified"
+    t.hstore   "info"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -57,7 +57,8 @@
     <div class="row">
 
       <div class="page-header">
-	<h1><%= @article.title %> <a type="button" class="btn btn-primary btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></h1>
+	<%= image_tag @article.feature.url(:thumb), class: "img img-responsive img-thumbnail" %>
+  <h1><%= @article.title %> <a type="button" class="btn btn-primary btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></h1>
       </div>
 
 	<p class="lead">
@@ -65,9 +66,6 @@
 	</p>
     </div>
   </div><!-- /.container -->
-	
-
-<a href="<%= articles_path %>" type="button" class="btn btn-primary">View All</a>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 		if current_user.id == Article.find(params[:id]).user_id
 			@article = Article.find(params[:id])
 		else
-			flash[:alert] = 'Cannot edit articles you did not create. Only Admins have that access'
+			flash[:alert] = "Sorry! You can only edit articles you create. Only admin accounts can edit other users' articles"
 			redirect_to root_path
 		end
 	end
@@ -52,6 +52,6 @@ class ArticlesController < ApplicationController
 		      
 	private
 		def article_params
-			params.require(:article).permit(:title, :text)
+			params.require(:article).permit(:title, :text, :feature)
 		end	
 end

@@ -5,10 +5,18 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
+  # For Devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  validates :fname, presence: true
+  validates :lname, presence: true
+  store_accessor :info, :location, :bio, :about, :gender, :birthday, :name, :link
+
+  # For Paperclip
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "32x32>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -37,8 +45,10 @@ class User < ActiveRecord::Base
           fname: auth.info.first_name,
           lname: auth.info.last_name,
           #username: auth.info.nickname || auth.uid,
-          email: auth.info.email,
-          about: auth.extra.raw_info.about,
+          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          temp_email: auth.info.email,
+          info: auth.info,
+          about: auth.info.bio,
           image: auth.info.image,
           password: Devise.friendly_token[0,20]
         )
