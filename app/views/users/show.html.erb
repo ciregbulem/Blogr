@@ -15,15 +15,17 @@
           
             <div class="media">
               <a class="media-left" href="#">
-                <% if @user.image == nil %>
-                  <%= image_tag @user.avatar.url(:medium), class: "img img-responsive img-rounded img-thumbnail" %>
+                <% if @user.avatar_file_name != nil %>
+                  <%= image_tag @user.avatar.url(:medium), class: "img img-rounded img-thumbnail" %>
+                <% elsif @user.image != nil %>
+                  <%= image_tag @user.image, size: "300", class: "img img-rounded img-thumbnail" %>
                 <% else %>
-                  <%= image_tag @user.image, size: "300", class: "img-responsive img-rounded img-thumbnail" %>
+                  <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded" width="32" height="32">
                 <% end %>
               </a>
               <div class="media-body">
                 <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
-                <a href="<%= @user.info{"link"} %>"><i class="fa fa-facebook-square"></i></a>
+
                 <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-md" %>
               </div>
             </div>
@@ -37,7 +39,7 @@
             <div class="panel-heading">About</div>
             <div class="panel-body">
               <p>
-                <%= @user.info %>
+                
               </p>
             </div>
           </div>
