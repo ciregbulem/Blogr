@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   store_accessor :info, :location, :bio, :about, :gender, :birthday, :name, :link
 
   # For Paperclip
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "32x32>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "32x32>" }, :default_url => "/images/:style/missing.png", :url => ":s3_domain_url", :path => "/:class/:attachment/:id_partition/:style/:filename"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def self.find_for_oauth(auth, signed_in_resource = nil)

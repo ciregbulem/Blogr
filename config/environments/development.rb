@@ -41,5 +41,13 @@ Rails.application.configure do
   # For Paperclip:
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
-  
+    # Paperclip w/ S3
+    config.paperclip_defaults = {
+    :storage => :s3,
+    #:s3_host_name => 'REMOVE_THIS_LINE_IF_UNNECESSARY',
+    :s3_credentials => {
+      :bucket => "chudiblog-development"
+    }
+}
+
 end
