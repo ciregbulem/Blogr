@@ -1,7 +1,7 @@
 development:
-  access_key_id: AKIAJRAOBHNMUM6STG2A
-  secret_access_key: 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
+  access_key_id: ENV['AWS_access_key_id']
+  secret_access_key: ENV['AWS_secret_access_key']
 
 production:
-  access_key_id: "AKIAJRAOBHNMUM6STG2A"
-  secret_access_key: "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"
+  access_key_id: ENV['AWS_access_key_id']
+  secret_access_key: ENV['AWS_secret_access_key']
