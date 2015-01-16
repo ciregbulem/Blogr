@@ -1,7 +1,0 @@
-development:
-  access_key_id: "AKIAI4UIYT3ZMZFP73ZQ"
-  secret_access_key: "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"
-
-production:
-  access_key_id: "AKIAI4UIYT3ZMZFP73ZQ"
-  secret_access_key: 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
