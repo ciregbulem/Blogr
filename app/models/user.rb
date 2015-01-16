@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
       # user to verify it on the next step via UsersController.finish_signup
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       email = auth.info.email if email_is_verified
-      user = User.where(:email => email).first if email
+      user = User.find_by email: auth.info.email
 
       # Create the user if it's a new registration
       if user.nil?
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           temp_email: auth.info.email,
           info: auth.info,
-          about: auth.info.bio,
+          #about: auth.info.bio,
           image: auth.info.image,
           password: Devise.friendly_token[0,20]
         )

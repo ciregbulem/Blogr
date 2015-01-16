@@ -4,11 +4,11 @@
   <title><%= @user.fname %> <%= @user.lname %></title>
 </head>
   <body>
-    	<ol class="breadcrumb">
-    	  <li><a href="<%= root_path %>">Home</a></li>
-    	  <li><a href="<%= users_path %>">Users</a></li>
-    	  <li class="active"><%= @user.fname %></li>
-    	</ol>
+  	<ol class="breadcrumb">
+  	  <li><a href="<%= root_path %>">Home</a></li>
+  	  <li><a href="<%= users_path %>">Users</a></li>
+  	  <li class="active"><%= @user.fname %></li>
+  	</ol>
     <div class="well well-lg">     
       <div class="row">  
         <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
@@ -26,7 +26,9 @@
               <div class="media-body">
                 <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
 
-                <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-md" %>
+                <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-sm" %>
+                <br>
+                
               </div>
             </div>
           </div>

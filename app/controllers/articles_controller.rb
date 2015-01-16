@@ -22,14 +22,15 @@ class ArticlesController < ApplicationController
 	def index
   		@articles = Article.paginate(:page => params[:page], :per_page => 4)
   		@articles = @articles.reverse_order
+  		@users = User.paginate(:page => params[:page], :per_page => 2)
+  		@users = @users.reverse_order
 	end
 	
 	def edit
 		if current_user.id == Article.find(params[:id]).user_id
 			@article = Article.find(params[:id])
 		else
-			flash[:alert] = "Sorry! You can only edit articles you create. Only admin accounts can make changes to all articles"
-			redirect_to root_path
+			flash[:alert] = "Whoops! You can only edit articles you created."
 		end
 	end
 	
@@ -44,10 +45,13 @@ class ArticlesController < ApplicationController
 	end
 	
 	def destroy
-		@article = Article.find(params[:id])
-		@article.destroy
-	       
-		redirect_to articles_path
+		if current_user.id == Article.find(params[:id]).user_id
+			@article = Article.find(params[:id])
+			@article.destroy
+		else
+			flash[:alert] = "Whoops! You can only delete articles you created."
+			redirect_to current_user
+		end
 	end
 		      
 	private

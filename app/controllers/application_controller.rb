@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
-  layout :layout_by_resource
+  #layout :layout_by_resource
 
   protected
 
@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def layout_by_resource
-    if devise_controller? && resource_name == :user && action_name != "index" && action_name != "finish_signup" && action_name != "new"
-      "user"
-    else
-      "application"
-    end
-  end
+  #def layout_by_resource
+  #  if devise_controller? && resource_name == :user && action_name != "index" && action_name != "finish_signup" && action_name != "new"
+  #    "user"
+  #  else
+  #    "application"
+  #  end
+  #end
 end

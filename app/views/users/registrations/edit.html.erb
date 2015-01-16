@@ -3,6 +3,32 @@
     <title>Edit Profile</title>
   </head>
   <body data-spy="scroll" data-target=".navbar-example" style="position: relative;">
+    <ol class="breadcrumb">
+      <li><a href="<%= root_path %>">Home</a></li>
+      <li><a href="<%= users_path %>">Users</a></li>
+      <li class="active"><%= @user.fname %></li>
+    </ol>
+    <div class="well well-lg">     
+      <div class="row">  
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+          
+            <div class="media">
+              <a class="media-left" href="#">
+                <% if @user.avatar_file_name != nil %>
+                  <%= image_tag @user.avatar.url(:medium), class: "img img-rounded img-thumbnail" %>
+                <% elsif @user.image != nil %>
+                  <%= image_tag @user.image, size: "300", class: "img img-rounded img-thumbnail" %>
+                <% else %>
+                  <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded" width="32" height="32">
+                <% end %>
+              </a>
+              <div class="media-body">
+                <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
           <div class="panel panel-default">
             <div class="panel-heading"><h4><i class="fa fa-edit"> Edit Profile</i></h4></div>
               <div class="panel-body">
