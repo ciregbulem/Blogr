@@ -19,4 +19,4 @@
 /config/application.yml
 
 # Ignore AWS configuration
-/config.aws.yml
+/config/aws.yml
