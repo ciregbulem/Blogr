@@ -46,14 +46,16 @@
               <% end %>
           </li>
         <% end %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog fa-2x"></span></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-              <li role="presentation" class="dropdown-header">Profile</li>
-              <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
-              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-            </ul>
-          </li>
+          <% if user_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog fa-2x"></span></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                <li role="presentation" class="dropdown-header">Profile</li>
+                <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
+                <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              </ul>
+            </li>
+          <% end %>
       </ul>
     </div>
   </div>
