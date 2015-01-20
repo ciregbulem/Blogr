@@ -15,6 +15,10 @@
 //= require turbolinks
 //= require_tree .
 
+=require jquery
+=require jquery.jcrop
+=require papercrop
+
 function makeActive (id)
 {
 	var button = document.getElementById(id);

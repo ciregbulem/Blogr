@@ -11,29 +11,47 @@
   	</ol>
     <div class="well well-lg">     
       <div class="row">  
-        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-          
-            <div class="media">
-              <a class="media-left" href="#">
-                <% if @user.avatar_file_name != nil %>
-                  <%= image_tag @user.avatar.url(:medium), class: "img img-rounded img-thumbnail" %>
-                <% elsif @user.image != nil %>
-                  <%= image_tag @user.image, size: "300", class: "img img-rounded img-thumbnail" %>
-                <% else %>
-                  <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded" width="32" height="32">
-                <% end %>
-              </a>
-              <div class="media-body">
-                <h1 class="media-heading"><%= @user.fname %> <%= @user.lname %> <small>(<%= @user.email %>)</small></h1><br>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">          
+          <% if @user.avatar_file_name != nil %>
+            <!-- Button trigger modal -->
+            <a type="button" data-toggle="modal" data-target="#myModal" class="btn">
+              <%= image_tag @user.avatar.url(:medium), class: "img img-responsive img-thumbnail img-rounded" %>
+            </a>
+             
+          <% elsif @user.image != nil %>
+            <%= image_tag @user.image, size: "300", class: "img img-rounded img-thumbnail" %>
+          <% else %>
+            <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded img-thumbnail" width="300" height="300">
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">
+          <h1><%= @user.fname %> <%= @user.lname %><br><small>(<%= @user.email %>)</small></h1>
+          <% if current_user.id == @user.id %>
+            <%= link_to "Edit Profile", edit_user_registration_path, :class => "btn btn-default btn-sm" %>
+          <% end %>
+          <br>
+        </div>  
+      </div>
+    </div>
 
-                <%= link_to "Edit", edit_user_registration_path, :class => "btn btn-primary btn-sm" %>
-                <br>
-                
-              </div>
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= @user.fname %> <%= @user.lname %></h4>
+          </div>
+          <div class="modal-body">
+            <center><%= image_tag @user.avatar.url, class: "img img-responsive" %></center>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
+      </div>
     </div>
+    <!--Modal End -->
 
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <div class="row">
@@ -81,10 +99,14 @@
                             <h1 class="media-heading"><a href="<%= article_path(article) %>"><%= article.title %></a></h1>
                             <p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
                               <div class="btn-group">
-                                <a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
+                                <a type="button" href="<%= article_path(article) %>" class="btn btn-primary"><i class="fa fa-eye"></i> Read</a> 
                                 <% if user_signed_in? %>
-                                  <a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a> 
-                                  <%= link_to 'Delete', article_path(article), :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                                  <% if current_user.id == @user.id %>   
+                                    <a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a> 
+                                    <%= link_to article_path(article), :class => "btn btn-danger" ,method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                     <i class="fa fa-trash"></i> Delete
+                                    <% end %>
+                                  <% end %>
                                 <% end %>
                               </div>
                           </div>

@@ -15,8 +15,11 @@ class User < ActiveRecord::Base
   store_accessor :info, :location, :bio, :about, :gender, :birthday, :name, :link
 
   # For Paperclip
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "32x32>" }, :default_url => "/images/:style/missing.png", :url => ":s3_domain_url", :path => "/:class/:attachment/:id_partition/:style/:filename"
+  has_attached_file :avatar, :styles => { :medium => "200x200#", :thumb => "32x32#" }, :default_url => "/images/:style/missing.png", :url => ":s3_domain_url", :path => "/:class/:attachment/:id_partition/:style/:filename"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  # For Papercrop
+  crop_attached_file :avatar, :aspect => "16:9"
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -48,6 +51,7 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           temp_email: auth.info.email,
           info: auth.info,
+          fb_link: auth.extra.raw_info.link,
           #about: auth.info.bio,
           image: auth.info.image,
           password: Devise.friendly_token[0,20]
@@ -69,6 +73,6 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
     
-  has_many :articles
+  has_many :articles, :dependent => :destroy
   validates :email, presence: true
 end

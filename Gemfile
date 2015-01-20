@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'nokogiri'
@@ -11,6 +12,7 @@ gem 'devise'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook'
 gem "paperclip", "~> 4.2"
+gem "papercrop"
 gem 'aws-sdk'
 gem 'figaro'
 ruby '2.0.0'

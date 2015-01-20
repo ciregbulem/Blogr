@@ -26,6 +26,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
+    @user_articles = Article.find_by user_id: @user.id
+    @user_articles.each.destroy
     super
   end
 

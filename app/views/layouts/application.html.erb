@@ -7,11 +7,11 @@
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/lumen/bootstrap.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #F7F7F7;">
     <div class="navbar navbar-inverse">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-inverse-collapse">
-        <span class="fa fa-navicon"></span>
+        <span class="fa fa-navicon fa-2x"></span>
       </button>
       <%= link_to "Rails Blog", root_path, class: "navbar-brand" %>
     </div>
@@ -52,9 +52,6 @@
               <li role="presentation" class="dropdown-header">Profile</li>
               <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
               <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
             </ul>
           </li>
       </ul>
