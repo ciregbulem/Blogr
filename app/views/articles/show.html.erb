@@ -26,7 +26,7 @@
       </div>
         
       <div class="row">
-        <div class="bg-primary img-rounded">
+        <div class="well well-lg">
           <div class="text-center">
             <br>
             <%= image_tag @article.feature.url(:large), class: "img img-responsive img-thumbnail" %>
@@ -36,10 +36,12 @@
             <br>
             <% if User.find(@article.user_id).fname != nil %>
               <small>by: <%= User.find(@article.user_id).fname %> <%= User.find(@article.user_id).lname %></small></h2>
-              <% if current_user.id == @article.user_id %>
-                <div class="btn-group">
-                  <a type="button" class="btn btn-default btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path, :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-              </div>
+              <% if user_signed_in? %>
+                <% if current_user.id == @article.user_id %>
+                  <div class="btn-group">
+                    <a type="button" class="btn btn-default btn-sm" href="<%= edit_article_path %>">Edit</a> <%= link_to 'Delete', article_path(@article), :class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>
