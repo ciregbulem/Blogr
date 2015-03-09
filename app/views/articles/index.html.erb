@@ -1,81 +1,91 @@
 <html>
 	<head>
-		<title>Rails Blog</title>
+		  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+		  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		  <%= javascript_include_tag :defaults %>
+		  <%= csrf_meta_tags %>
+		  <link href="/assets/stylesheets/css/yeti2-bootstrap.css" rel="stylesheet">
+		  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<title>Blogr</title>
 	</head>
 	<body>
 		<div class="row">
-			<% if user_signed_in? %>
-				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-			<% else %>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<% end %>
-				<div class="well">
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 					<% @articles.each do |article| %>
-						<div class="media">
-							<div class="media-left media-bottom">
+					<div class="col-lg-3">
+						<% if article.feature_file_name %>									
+							<%= link_to article_path(article) do %>
+								<img src="<%= article.feature.url(:large) %>" class="img img-responsive img-thumbnail" width="175" height="175" alt="article-image" %>
+							<% end %>
+						<% end %><br>
+						<center><a href="<%= article_path(article) %>" style="color: #000000;"><h4><%= article.title %></h4></a></center>
+					</div>
+					<% end %>
+			</div>
+				<!--<div style="background-color: #FFFFFF;">
+					<% @articles.each do |article| %>
+						<div class="col-lg-3">
 								<% if article.feature_file_name %>									
 									<%= link_to article_path(article) do %>
-										<%= image_tag article.feature.url(:medium), class: "img img-responsive img-thumbnail media-object", size: "175" %>
+										<img src="<%= article.feature.url(:large) %>" class="img img-responsive img-thumbnail" width="175" height="175" alt="article-image" %>
+									<% end %>
+								<% end %>
+						</div>
+						<div class="col-lg-8"><!-- Added some extra padding to bootstrap's media class 
+							<div class="media-heading"><strong><h1><a href="<%= article_path(article) %>" style="color: #000000;"><%= article.title %></a></h1></strong></div>
+							<p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
+							<div class="btn-group">
+								<a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
+								<% if user_signed_in? %>
+									<% if current_user.id == article.user_id %>
+										<a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a>
 									<% end %>
 								<% end %>
 							</div>
-							<div class="media-body" style="padding-left: 10px;"><!-- Added some extra padding to bootstrap's media class -->
-								<div class="media-heading"><strong><h1><a href="<%= article_path(article) %>" style="color: #000000;"><%= article.title %></a></h1></strong></div>
-								<p><%= truncate(article.text, length: 600, omission: " [...]") %></p>
-								<div class="btn-group">
-									<a type="button" href="<%= article_path(article) %>" class="btn btn-primary">Read</a> 
-									<% if user_signed_in? %>
-										<% if current_user.id == article.user_id %>
-											<a type="button" href="<%= edit_article_path(article) %>" class="btn btn-default">Edit</a>
-										<% end %>
-									<% end %>
-								</div>
-							</div>
 						</div>
 						<br>
+						<br>
 					<% end %>
-				</div>
+				</div>-->
 			<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
-			</div>
-			<% if user_signed_in? %>
-				<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
-					<div class="row">
-						<form role="search" class="form-horizontal">
-								<input type="text" placeholder="Search..." class="form-control">
-								<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
-					<div class="row">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<i class="fa fa-star"></i> Featured Articles</div>
-							<div class="panel-body">
+		
+			<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
+				<div class="row">
+					<form role="search" class="form-inline">
+							<input type="search" placeholder="Search..." class="form-control">
+							<button type="submit" class="btn btn-primary btn-md"><i class="fa fa-search"></i></button>
+					</form>
+				</div><br>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="fa fa-star"></i> Featured Articles</div>
+						<div class="panel-body">
 
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="panel panel-default">
-							<div class="panel-heading"><i class="fa fa-comments"></i> Recent Comments</div>
-							<div class="panel-body">
-								<p>
-
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="panel panel-default">
-							<div class="panel-heading"><i class="fa fa-server"></i> Categories</div>
-							<div class="panel-body">
-								<p>
-
-								</p>
-							</div>
 						</div>
 					</div>
 				</div>
-			<% end %>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading"><i class="fa fa-comments"></i> Recent Comments</div>
+						<div class="panel-body">
+							<p>
+
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading"><i class="fa fa-server"></i> Categories</div>
+						<div class="panel-body">
+							<p>
+
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>		
 	</body>
 </html>

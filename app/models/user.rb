@@ -74,5 +74,6 @@ class User < ActiveRecord::Base
   end
     
   has_many :articles, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   validates :email, presence: true
 end

@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
-    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/yeti/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/stylesheets/css/yeti2-bootstrap.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body style="background-color: #F7F7F7;">
-    <div class="navbar navbar-default" style="padding-top: 10px;">
+<body style="background-color: #FFFFFF;">
+  <div class="navbar navbar-default">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-inverse-collapse">
         <span class="fa fa-navicon fa-2x"></span>
       </button>
-      <%= link_to "Rails Blog", root_path, class: "navbar-brand" %>
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag "https://s3-us-west-1.amazonaws.com/chudiblog-development/blogr_cloud.png", size: "32" %>
+            <h4 style="display:inline;">Blogr</h4>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Home', root_path%></li>
-        <li><%= link_to 'New', new_article_path%></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? != true %>
+    <% if user_signed_in? != true %> <!-- User Not Signed In -->
+      <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to root_path do %>
+                <i class="fa fa-home"></i> Home
+              <% end %>
+          </li>
+          <li><%= link_to new_article_path do %>
+                <i class="fa fa-plus"></i> New
+              <% end %>
+          </li>
+          <li><%= link_to root_path do %>
+                <i class="fa fa-server"></i> Categories
+              <% end %>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <%= link_to new_user_session_path do %>
               <i class="fa fa-sign-in"></i> Login
@@ -30,35 +47,67 @@
           </li>
           <li>
             <%= link_to new_user_registration_path do %>
-                  <i class="fa fa-check"></i> Sign Up
+              <i class="fa fa-check"></i> Sign Up
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% else %> <!-- User Signed In -->
+      <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to root_path do %>
+                <i class="fa fa-home fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">Home</h5>
               <% end %>
           </li>
-      <% else %>
-          <li>
-            <%= link_to current_user do %>
-              <% if current_user.avatar_file_name != nil %>
-                  <%= image_tag current_user.avatar.url(:thumb), class: " img-rounded" %>
-                <% elsif current_user.image != nil %>
-                  <%= image_tag current_user.image, size: "32", class: " img-rounded" %>
-                <% else %>
-                  <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded" width="32" height="32">
+          <li><%= link_to new_article_path do %>
+                <i class="fa fa-plus fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">New</h5>
+              <% end %>
+          </li>
+          <li><%= link_to root_path do %>
+                <i class="fa fa-server fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">Categories</h5>
+              <% end %>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 8px;"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+              <li role="presentation" class="dropdown-header">Profile</li>
+              <li role="presentation">
+                <%= link_to current_user do %>
+                  <%= image_tag current_user.avatar.url(:thumb), class: " img img-rounded img-thumbnail", style: "padding: 1px;" %> <%= current_user.fname %>
                 <% end %>
-                <%= current_user.fname %>
-              <% end %>
+              </li>
+              <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
+              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            </ul>
           </li>
-        <% end %>
-          <% if user_signed_in? %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 10px;"></span></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                <li role="presentation" class="dropdown-header">Profile</li>
-                <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
-                <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-              </ul>
-            </li>
-          <% end %>
-      </ul>
-    </div>
+        </ul>
+
+          <!--
+          <li class="pull-right navbar-right">
+            <%= link_to current_user, style: "padding: 0px;" do %>
+              <% if current_user.avatar_file_name != nil %>
+                <%= image_tag current_user.avatar.url(:thumb), class: " img img-rounded img-thumbnail", style: "padding: 1px;" %>
+              <% elsif current_user.image != nil %>
+                <%= image_tag current_user.image, size: "32", class: "img img-rounded img-thumbnail", style: "padding: 1px;" %>
+              <% else %>
+                <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded img-thumbnail" width="32" height="32">
+              <% end %>
+              <%= current_user.fname %>
+            <% end %>
+          </li>
+          <li class="dropdown pull-right navbar-right">
+            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+              <li role="presentation" class="dropdown-header">Profile</li>
+              <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
+              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            </ul>
+          </li> -->
+        </ul>
+      </div>
+    <% end %>
   </div>
     <% if flash.alert || flash.notice %>
     
@@ -83,10 +132,7 @@
     <% end %>
 </div>
     <div class="container">
-	<div class="col-xs-12 col-sm-12 col md-12 col-lg-12">
-
-	  <%= yield %>
-	</div>
+	   <%= yield %>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
