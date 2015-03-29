@@ -47,17 +47,6 @@
           </div>
         <br>
       </div>
-      <div class="row">
-        <h2>Add a comment:</h2>
-        <%= bootstrap_form_for([@article, @article.comments.build]) do |f| %>
-          <p>
-            <%= f.text_area :body %>
-          </p>
-          <p>
-            <%= f.submit %>
-          </p>
-        <% end %>
-      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

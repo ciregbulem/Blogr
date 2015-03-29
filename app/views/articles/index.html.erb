@@ -12,13 +12,14 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 					<% @articles.each do |article| %>
-					<div class="col-lg-3">
+					<div class="col-md-4 col-lg-3">
 						<% if article.feature_file_name %>									
 							<%= link_to article_path(article) do %>
-								<img src="<%= article.feature.url(:large) %>" class="img img-responsive img-thumbnail" width="175" height="175" alt="article-image" %>
+								<center><img src="<%= article.feature.url(:large) %>" class="img img-responsive img-thumbnail" width="90%" height="90%" alt="article-image" %><br>
+								<h4 style="color: #000000; text-decoration: none;"><%= article.title %></h4></center>
 							<% end %>
 						<% end %><br>
-						<center><a href="<%= article_path(article) %>" style="color: #000000;"><h4><%= article.title %></h4></a></center>
+						<center><a href="<%= article_path(article) %>"></a></center>
 					</div>
 					<% end %>
 			</div>
@@ -52,7 +53,7 @@
 			<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
 				<div class="row">
 					<form role="search" class="form-inline">
-							<input type="search" placeholder="Search..." class="form-control">
+							<input type="search" placeholder="Search..." class="form-control input-md">
 							<button type="submit" class="btn btn-primary btn-md"><i class="fa fa-search"></i></button>
 					</form>
 				</div><br>

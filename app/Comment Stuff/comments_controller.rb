@@ -1,10 +1,19 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  def new
+  	@comment = Comment.new(comment_params)
+  end
+
   def create
     @article = Article.find(params[:id])
-    @comment = @article.comments.create(comment_params)
+    #@comment = @article.Comments.create(comment_params)
     @comment.user_id = current_user.id
-    redirect_to article_path(@article)
+    if @comment.save
+			@comment.save
+			redirect_to @article
+		else
+			render 'new'
+		end
   end
  
   private
