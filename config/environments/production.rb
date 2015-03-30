@@ -78,6 +78,7 @@ Rails.application.configure do
     
   # For Devise:
     config.action_mailer.default_url_options = { host: 'http://chudiblog.herokuapp.com'}
+    config.assets.initialize_on_precompile =  false
 
    # For Paperclip:
   Paperclip.options[:command_path] = "/usr/local/bin/"

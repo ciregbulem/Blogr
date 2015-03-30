@@ -23,7 +23,8 @@
         </div>
       <% end %>
     </div>
-    <% if user_signed_in? != true %> <!-- User Not Signed In -->
+    <!-- User Not Signed In -->
+    <% if user_signed_in? != true %>
       <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
         <ul class="nav navbar-nav navbar-left">
           <li><%= link_to root_path do %>
@@ -52,7 +53,8 @@
           </li>
         </ul>
       </div>
-    <% else %> <!-- User Signed In -->
+    <!-- User Signed In -->
+    <% else %>
       <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
         <ul class="nav navbar-nav navbar-left">
           <li><%= link_to root_path do %>
@@ -70,7 +72,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 8px;"></span></a>
+            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 8px;"></span>
+            </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
               <li role="presentation" class="dropdown-header">Profile</li>
               <li role="presentation">
@@ -79,32 +82,9 @@
                 <% end %>
               </li>
               <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
-              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
             </ul>
           </li>
-        </ul>
-
-          <!--
-          <li class="pull-right navbar-right">
-            <%= link_to current_user, style: "padding: 0px;" do %>
-              <% if current_user.avatar_file_name != nil %>
-                <%= image_tag current_user.avatar.url(:thumb), class: " img img-rounded img-thumbnail", style: "padding: 1px;" %>
-              <% elsif current_user.image != nil %>
-                <%= image_tag current_user.image, size: "32", class: "img img-rounded img-thumbnail", style: "padding: 1px;" %>
-              <% else %>
-                <img src="http://www.faithlineprotestants.org/wp-content/uploads/2010/12/facebook-default-no-profile-pic.jpg" alt="No Avatar Exists" class="img img-rounded img-thumbnail" width="32" height="32">
-              <% end %>
-              <%= current_user.fname %>
-            <% end %>
-          </li>
-          <li class="dropdown pull-right navbar-right">
-            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-              <li role="presentation" class="dropdown-header">Profile</li>
-              <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
-              <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-            </ul>
-          </li> -->
         </ul>
       </div>
     <% end %>
