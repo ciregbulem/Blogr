@@ -2,8 +2,9 @@
 <html>
 <head>
   <title><%= @user.fname %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/yeti/bootstrap.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -52,7 +53,7 @@
 	          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
 	            <li role="presentation" class="dropdown-header">Profile</li>
 	            <li role="presentation"><%= link_to "Edit", edit_user_registration_path %></li>
-	            <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+	            <li role="presentation"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 	            <li><a href="#">Something else here</a></li>
 	            <li class="divider"></li>
 	            <li><a href="#">Separated link</a></li>
