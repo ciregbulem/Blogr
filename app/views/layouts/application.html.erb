@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="/assets/stylesheets/css/yeti2-bootstrap.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
-  <link href="/assets/stylesheets/css/yeti2-bootstrap.css" rel="stylesheet">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #FFFFFF;">
   <div class="navbar navbar-default" style="padding-top: 10px;padding-bottom: 15px;">
@@ -100,14 +104,16 @@
         </div>
     </div>
     <% end %>
-</div>
+  </div>
     <div class="container">
 	   <%= yield %>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <br>
+    <div class="container-fluid" style="background-color: #FF931E;"> 
+      <h5 class="text-center" style="padding: 30px; color: #FFFFFF;">© 2015 Blogr. Developed by <a href="http://ciregbulem.github.io" style="color: #FFFFFF;">Chudi Iregbulem</a>
+      </h5>
+    </div>
+
     <script type="text/javascript">
       $('[data-toggle=dropdown]').dropdown()
       $(document).ready(function(){
@@ -123,32 +129,32 @@
        })
     </script>
     <script type="text/javascript">
-      (function (jQuery) {
-    jQuery.mark = {
-      jump: function (options) {
-        var defaults = {
-          selector: 'a.smooth-scroll'
-        };
-        if (typeof options == 'string') defaults.selector = options;
-        var options = jQuery.extend(defaults, options);
-        return jQuery(options.selector).click(function (e) {
-          var jumpobj = jQuery(this);
-          var target = jumpobj.attr('href');
-          var thespeed = 1000;
-          var offset = jQuery(target).offset().top;
-          jQuery('html,body').animate({
-            scrollTop: offset
-          }, thespeed, 'swing')
-          e.preventDefault();
-        })
+        (function (jQuery) {
+      jQuery.mark = {
+        jump: function (options) {
+          var defaults = {
+            selector: 'a.smooth-scroll'
+          };
+          if (typeof options == 'string') defaults.selector = options;
+          var options = jQuery.extend(defaults, options);
+          return jQuery(options.selector).click(function (e) {
+            var jumpobj = jQuery(this);
+            var target = jumpobj.attr('href');
+            var thespeed = 1000;
+            var offset = jQuery(target).offset().top;
+            jQuery('html,body').animate({
+              scrollTop: offset
+            }, thespeed, 'swing')
+            e.preventDefault();
+          })
+        }
       }
-    }
-  })(jQuery);
+    })(jQuery);
 
 
-  jQuery(function(){  
-    jQuery.mark.jump();
-  });
+    jQuery(function(){  
+      jQuery.mark.jump();
+    });
     </script>
 </body>
 </html>
