@@ -9,7 +9,7 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #FFFFFF;">
-  <div class="navbar navbar-default">
+  <div class="navbar navbar-default" style="padding-top: 10px;padding-bottom: 15px;">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-inverse-collapse">
         <span class="fa fa-navicon fa-2x" style="color: #FFFFFF"></span>
@@ -17,30 +17,22 @@
       <%= link_to root_path, class: "navbar-brand" do %>
         <div class="media" style="margin-bottom: 10px;">
           <div class="media-left">
-            <%= image_tag "https://s3-us-west-1.amazonaws.com/chudiblog-development/blogr_cloud.png", size: "32" %>
+            <%= image_tag "https://s3-us-west-1.amazonaws.com/chudiblog-development/blogr_cloud.png", size: "40" %>
             <h4 style="display:inline;">Blogr</h4>
           </div>
         </div>
       <% end %>
     </div>
     <!-- User Not Signed In -->
-    <% if user_signed_in? != true %>
+    <% if !user_signed_in? %>
       <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
-        <ul class="nav navbar-nav navbar-left">
+        <ul class="nav navbar-nav navbar-left" style="padding-top: 8px;">
           <li><%= link_to root_path do %>
                 <i class="fa fa-home"></i> Home
               <% end %>
           </li>
-          <li><%= link_to new_article_path do %>
-                <i class="fa fa-plus"></i> New
-              <% end %>
-          </li>
-          <!--<li><%= link_to root_path do %>
-                <i class="fa fa-server"></i> Categories
-              <% end %>
-          </li>-->
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="padding-top: 8px;">
           <li>
             <%= link_to new_user_session_path do %>
               <i class="fa fa-sign-in"></i> Login
@@ -56,7 +48,7 @@
     <!-- User Signed In -->
     <% else %>
       <div class="navbar-collapse collapse" id="navbar-inverse-collapse">
-        <ul class="nav navbar-nav navbar-left">
+        <ul class="nav navbar-nav navbar-left" style="padding-top: 8px;">
           <li><%= link_to root_path do %>
                 <i class="fa fa-home fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">Home</h5>
               <% end %>
@@ -65,14 +57,10 @@
                 <i class="fa fa-plus fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">New</h5>
               <% end %>
           </li>
-          <li><%= link_to root_path do %>
-                <i class="fa fa-server fa-1x" style="margin-right: 3px;"></i> <h5 style="display: inline;">Categories</h5>
-              <% end %>
-          </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="padding-top: 5px;">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 8px;"></span>
+            <a href="#" class="dropdown-toggle btn btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" style="padding-top: 8px; font-size: 20pt;"></span>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
               <li role="presentation" class="dropdown-header">Profile</li>
